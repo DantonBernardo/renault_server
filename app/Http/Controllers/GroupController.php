@@ -83,7 +83,7 @@ class GroupController extends Controller
         $delayed = [];
 
         foreach ($groups as $group) {
-            if ($group->group_time > 10) {
+            if ($group->group_time > 12) {
                 $maxCube = $group->cubes->sortByDesc('individual_time')->first();
                 $diff = ($group->group_time) - 10;
 
@@ -114,7 +114,7 @@ class GroupController extends Controller
         $early = [];
 
         foreach ($groups as $group) {
-            if ($group->group_time < 2) {
+            if ($group->group_time < 5) {
                 $minCube = $group->cubes->sortBy('individual_time')->first();
                 $diff = 2 - $group->group_time;
 
@@ -167,6 +167,7 @@ class GroupController extends Controller
 
     public function store(Request $request)
     {
+        Log::debug('dasdsa');
         $request->validate([
             'group_time' => 'required|numeric',
             'cubes' => 'required|array|size:3',
